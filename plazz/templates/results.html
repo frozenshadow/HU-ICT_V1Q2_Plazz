@@ -1,0 +1,75 @@
+<!-- Initial Page, "data-name" contains page name -->
+<div data-name="results" class="page">
+    <!-- Fixed/Dynamic Navbar -->
+    <div class="navbar no-hairline no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a class="link back">
+                    <i class="icon icon-back"></i>
+                    <span class="ios-only">Filters</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content login-screen-content">
+        <div class="block inset">
+            <div class="card data-table data-table-collapsible data-table-init">
+                <div class="card-header">
+                    <div class="data-table-title">Resultaat</div>
+                </div>
+                <div class="card-content">
+                    <table id="resultTable" class="sortable">
+                        <thead>
+                        <tr>
+                            <th class="label-cell sortable-cell">Locatie</th>
+                            <th class="numeric-cell sortable-cell">Huurprijs</th>
+                            <th class="numeric-cell sortable-cell">Concurentie</th>
+                            <th class="numeric-cell sortable-cell">Aantal bewoners (12 Km straal)</th>
+                            <th class="numeric-cell sortable-cell">Geschiktheid</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="label-cell">Biltstraat 23</td>
+                            <td class="numeric-cell">€ 1.690</td>
+                            <td class="numeric-cell">3</td>
+                            <td class="numeric-cell">83.544</td>
+                            <td class="numeric-cell">4.0</td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">2B, Europalaan</td>
+                            <td class="numeric-cell">€ 9.500</td>
+                            <td class="numeric-cell">16</td>
+                            <td class="numeric-cell">41.956</td>
+                            <td class="numeric-cell">4.4</td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">Veemarktplein 42</td>
+                            <td class="numeric-cell">€ 2.000</td>
+                            <td class="numeric-cell">1</td>
+                            <td class="numeric-cell">22.127</td>
+                            <td class="numeric-cell">6.0</td>
+                        </tr>
+                        <tr>
+                            <td class="label-cell">Oudlaan 4</td>
+                            <td class="numeric-cell">€ 5.833</td>
+                            <td class="numeric-cell">9</td>
+                            <td class="numeric-cell">19.073</td>
+                            <td class="numeric-cell">4.3</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="block inset">
+            <div class="card card-outline">
+                <div class="card-content">
+                    <div id="map" style='height: 500px;'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

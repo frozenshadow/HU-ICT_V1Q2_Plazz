@@ -1,0 +1,137 @@
+<!-- Initial Page, "data-name" contains page name -->
+<div data-name="filters" class="page">
+    <!-- Fixed/Dynamic Navbar -->
+    <div class="navbar no-hairline no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a class="link back">
+                    <i class="icon icon-back"></i>
+                    <span class="ios-only">Back</span>
+                </a>
+            </div>
+            <div class="right">
+                <a href="/results" class="link">Volgende</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content login-screen-content">
+        <div class="login-screen-title">Filters</div>
+        <div class="block">
+            <p>Vul hier uw eisen voor de potentiële locatie van het Pop-up restaurant in.</p>
+        </div>
+        <div class="list simple-list">
+            <div class="block-title display-flex justify-content-space-between">HUURPRIJS <span class="price-value">$200 - $400</span>
+        </div>
+            <ul>
+                <li class="item-row">
+                    <div class="item-cell width-auto flex-shrink-0">
+                        <i class="icon f7-icons ios-only">money_dollar</i>
+                        <i class="icon material-icons md-only">attach_money</i>
+                    </div>
+                    <div class="item-cell item-cell-shrink-3">
+                        <!-- Dual range slider with all the parameters passed via data- attributes -->
+                        <div
+                                id="price-filter"
+                                class="range-slider range-slider-init color-green"
+                                data-label="true"
+                                data-dual="true"
+                                data-min="0"
+                                data-max="500"
+                                data-step="1"
+                                data-value-left="200"
+                                data-value-right="400"
+                        ></div>
+                    </div>
+                    <div class="item-cell width-auto flex-shrink-0">
+                        <i class="icon f7-icons ios-only">money_dollar_fill</i>
+                        <i class="icon material-icons md-only">monetization_on</i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+<div class="list simple-list">
+    <div class="block-title">Super Heroes</div>
+  <ul>
+    <li>
+      <span>Batman</span>
+      <label class="toggle toggle-init color-black">
+        <input type="checkbox" checked>
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Aquaman</span>
+      <label class="toggle toggle-init color-blue">
+        <input type="checkbox" checked>
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Superman</span>
+      <label class="toggle toggle-init color-red">
+        <input type="checkbox" checked>
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Hulk</span>
+      <label class="toggle toggle-init color-green">
+        <input type="checkbox">
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Spiderman (Disabled)</span>
+      <label class="toggle toggle-init disabled">
+        <input type="checkbox">
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Ironman (Disabled)</span>
+      <label class="toggle toggle-init toggle-init">
+        <input type="checkbox" checked disabled>
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Thor</span>
+      <label class="toggle toggle-init color-orange">
+        <input type="checkbox" checked>
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+    <li>
+      <span>Wonder Woman</span>
+      <label class="toggle toggle-init color-pink">
+        <input type="checkbox">
+        <span class="toggle-icon"></span>
+      </label>
+    </li>
+  </ul>
+</div>
+
+        <div class="list">
+            <div class="block-title">STEPPER</div>
+  <ul>
+    <li class="item-content">
+      <div class="item-inner">
+        <div class="item-title"><span id="apples-count"></span> Widget</div>
+        <div class="item-after">
+          <div class="stepper stepper-init" data-value-el="#apples-count">
+            <div class="stepper-button-minus"></div>
+            <div class="stepper-button-plus"></div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+            <div class="block-footer text-align-left">
+                <p>This is a sample description that sits below a group</p>
+            </div>
+</div>
+    </div>
+</div>

@@ -1,0 +1,324 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+
+    {# Page title #}
+    <title>{% block title %}Plazz{% endblock %}</title>
+
+    {# Meta tags #}
+    {% include "partials/meta-tags.html" %}
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+
+
+    {% block stylesheets %}
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+
+    {% block headincludes %}
+
+    {% endblock %}
+        <style>
+            .ios .navbar, .ios .navbar:after {
+                background-color: transparent;
+            }
+
+            #sorttable_sortfwdind, #sorttable_sortrevind {
+                display: none;
+            }
+
+            div[data-name="results"] .login-screen-content:before {
+                content: "";
+                position: fixed;
+                left: 0;
+                right: 0;
+                z-index: -1;
+                display: block;
+                top: 0;
+                background: linear-gradient(rgba(97, 192, 76, 0.4), rgba(97, 192, 76, 0.4)), url(https://images.unsplash.com/photo-1504682153790-007c47b98407?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+                width: 100%;
+                height: 100%;
+                filter: blur(5px);
+            }
+            .ios body[data-name="results"] .navbar a.link {
+                color: #fff;
+            }
+            .ios body[data-name="results"] .icon-back, .ios body[data-name="results"] .icon-prev {
+                background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D'12'%20height%3D'20'%20viewBox%3D'0%200%2012%2020'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M.18261596%209.4221638c.0352203-.05148305.07573462-.10050698.1215468-.14631917L9.1425872.4374202c.5830904-.58309038%201.52656832-.5849888%202.11643872.00488163.5857864.58578644.591222%201.53009836.0048816%202.11643873L3.82594417%209.9967039l7.43188553%207.4318855c.5830904.5830904.5849888%201.5265683-.0048817%202.1164387-.5857864.5857865-1.5300983.591222-2.11643868.0048816L.2980849%2010.7114853c-.3526746-.3526746-.3939974-.89699-.11546894-1.2893215z'%20fill%3D'%23FFF'%20fill-rule%3D'evenodd'%2F%3E%3C%2Fsvg%3E");
+            }
+            div[data-name="results"] .login-screen-content .block {
+                max-width: 900px;
+            }
+
+
+
+
+            .mapboxgl-popup {
+max-width: 400px;
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+        </style>
+</head>
+<body id="{% block body_id %}{% endblock %}">
+    <!-- App root element -->
+    <div id="app">
+        <!-- Statusbar overlay -->
+        <div class="statusbar"></div>
+
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="home" class="page">
+                <!-- Navbar -->
+                <div class="navbar no-hairline no-shadow"></div>
+
+                <!-- Scrollable page content -->
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">Plaats</div>
+                    <div class="list links-list single-item" style="margin-bottom: 85px;">
+                        <ul>
+                            <li><a href="/filters">Utrecht</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="list links-list">
+                        <div class="block-title">MEER PLAATSEN</div>
+                        <ul>
+                            <li><a href="#">Amsterdam</a></li>
+                            <li><a href="#">Rotterdam</a></li>
+                            <li><a href="#">Utrecht</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="block block-strong no-hairlines text-align-center">
+                        <span><b>Welke plaats moet ik kiezen?</b></span>
+                        <p>Dit is de plaats waarin de meest geschikte locatie voor het Pop-up restaurant zal worden bepaald.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block modal %}
+{% comment %}          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header borderless">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Deze functie werkt niet in deze demo!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                        </div>
+                    </div>
+              </div>
+          </div>{% endcomment %}
+      {% endblock modal %}
+
+    {% block javascripts %}
+        <script src="{% static 'js/sorttable.min.js' %}"></script>
+        <script src="{% static 'js/framework7.min.js' %}"></script>
+        <script>
+            var $$ = Dom7;
+            var app = new Framework7({
+                root: '#app',
+                name: 'Plazz',
+                id: 'com.plazz.test',
+                routes: [
+                    {
+                        path: '/filters',
+                        url: 'filters',
+                        on: {
+                            pageBeforeIn: function (event, page) {
+                                $$('#price-filter').on('range:change', function (e, range) {
+                                    $$('.price-value').text('$' + (range.value[0]) + ' - $' + (range.value[1]));
+                                });
+                            }
+                        },
+                    },
+                    {
+                        path: '/results',
+                        url: 'results',
+                        on: {
+                            pageBeforeIn: function (event, page) {
+                                var sortableTable = document.getElementById("resultTable");
+                                sorttable.makeSortable(sortableTable);
+
+                                //mapboxgl.accessToken = 'pk.eyJ1IjoiZnJvemVuc2hhZG93IiwiYSI6ImNqcmYzcXJ0cjByanM0NG9nN2ZnYnlsemUifQ.EAu2fpSTfmu0UUBbJOsl1w';
+                                var map = new mapboxgl.Map({
+                                    container: 'map',
+                                    style: 'mapbox://styles/mapbox/streets-v9',
+                                    center: [5.104480, 52.092876],
+                                    zoom: 11.15
+                                });
+
+                                new mapboxgl.Marker()
+.setLngLat([5.127468000000022, 52.0949199])
+.addTo(map);
+
+                                map.on('load', function () {
+                                    map.addLayer({
+                                        "id": "places",
+                                        "type": "symbol",
+                                        "source": {
+                                            "type": "geojson",
+                                            "data": {
+                                                "type": "FeatureCollection",
+                                                "features": [
+                                                    {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Make it Mount Pleasant</strong><p><a href=\"http://www.mtpleasantdc.com/makeitmtpleasant\" target=\"_blank\" title=\"Opens in a new window\">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>",
+                                                        "icon": "theatre"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [5.127468000000022, 52.0949199]
+                                                    }
+                                                    },
+                                                    {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Mad Men Season Five Finale Watch Party</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a <a href=\"http://madmens5finale.eventbrite.com/\" target=\"_blank\" title=\"Opens in a new window\">Mad Men Season Five Finale Watch Party</a>, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>",
+                                                        "icon": "theatre"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.003168, 38.894651]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Big Backyard Beach Bash and Wine Fest</strong><p>EatBar (2761 Washington Boulevard Arlington VA) is throwing a <a href=\"http://tallulaeatbar.ticketleap.com/2012beachblanket/\" target=\"_blank\" title=\"Opens in a new window\">Big Backyard Beach Bash and Wine Fest</a> on Saturday, serving up conch fritters, fish tacos and crab sliders, and Red Apron hot dogs. 12:00-3:00 p.m. $25.grill hot dogs.</p>",
+                                                        "icon": "bar"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.090372, 38.881189]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Ballston Arts & Crafts Market</strong><p>The <a href=\"http://ballstonarts-craftsmarket.blogspot.com/\" target=\"_blank\" title=\"Opens in a new window\">Ballston Arts & Crafts Market</a> sets up shop next to the Ballston metro this Saturday for the first of five dates this summer. Nearly 35 artists and crafters will be on hand selling their wares. 10:00-4:00 p.m.</p>",
+                                                        "icon": "art-gallery"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.111561, 38.882342]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Seersucker Bike Ride and Social</strong><p>Feeling dandy? Get fancy, grab your bike, and take part in this year's <a href=\"http://dandiesandquaintrelles.com/2012/04/the-seersucker-social-is-set-for-june-9th-save-the-date-and-start-planning-your-look/\" target=\"_blank\" title=\"Opens in a new window\">Seersucker Social</a> bike ride from Dandies and Quaintrelles. After the ride enjoy a lawn party at Hillwood with jazz, cocktails, paper hat-making, and more. 11:00-7:00 p.m.</p>",
+                                                        "icon": "bicycle"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.052477, 38.943951]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Capital Pride Parade</strong><p>The annual <a href=\"http://www.capitalpride.org/parade\" target=\"_blank\" title=\"Opens in a new window\">Capital Pride Parade</a> makes its way through Dupont this Saturday. 4:30 p.m. Free.</p>",
+                                                        "icon": "star"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.043444, 38.909664]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Muhsinah</strong><p>Jazz-influenced hip hop artist <a href=\"http://www.muhsinah.com\" target=\"_blank\" title=\"Opens in a new window\">Muhsinah</a> plays the <a href=\"http://www.blackcatdc.com\">Black Cat</a> (1811 14th Street NW) tonight with <a href=\"http://www.exitclov.com\" target=\"_blank\" title=\"Opens in a new window\">Exit Clov</a> and <a href=\"http://godsilla.bandcamp.com\" target=\"_blank\" title=\"Opens in a new window\">Gods’illa</a>. 9:00 p.m. $12.</p>",
+                                                        "icon": "music"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.031706, 38.914581]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>A Little Night Music</strong><p>The Arlington Players' production of Stephen Sondheim's  <a href=\"http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show\" target=\"_blank\" title=\"Opens in a new window\"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>",
+                                                        "icon": "music"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.020945, 38.878241]
+                                                    }
+                                                }, {
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description": "<strong>Truckeroo</strong><p><a href=\"http://www.truckeroodc.com/www/\" target=\"_blank\">Truckeroo</a> brings dozens of food trucks, live music, and games to half and M Street SE (across from Navy Yard Metro Station) today from 11:00 a.m. to 11:00 p.m.</p>",
+                                                        "icon": "music"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [-77.007481, 38.876516]
+                                                    }
+                                                }]
+                                            }
+                                        },
+                                        "layout": {
+                                            "icon-image": "{icon}-15",
+                                            "icon-allow-overlap": true
+                                        }
+                                    });
+
+                    // When a click event occurs on a feature in the places layer, open a popup at the
+                    // location of the feature, with description HTML from its properties.
+                                    map.on('click', 'places', function (e) {
+                                        var coordinates = e.features[0].geometry.coordinates.slice();
+                                        var description = e.features[0].properties.description;
+
+                    // Ensure that if the map is zoomed out such that multiple
+                    // copies of the feature are visible, the popup appears
+                    // over the copy being pointed to.
+                                        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                                            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                                        }
+
+                                        new mapboxgl.Popup()
+                                            .setLngLat(coordinates)
+                                            .setHTML(description)
+                                            .addTo(map);
+                                    });
+
+                    // Change the cursor to a pointer when the mouse is over the places layer.
+                                    map.on('mouseenter', 'places', function () {
+                                        map.getCanvas().style.cursor = 'pointer';
+                                    });
+
+                    // Change it back to a pointer when it leaves.
+                                    map.on('mouseleave', 'places', function () {
+                                        map.getCanvas().style.cursor = '';
+                                    });
+                                });
+                            }
+                        }
+                    },
+                ],
+            });
+
+            var mainView = app.views.create('.view-main');
+
+            // MOGELIJK NIET MEER NODIG!
+            $$(document).on('page:beforein', function (e) {
+                var page = e.detail;
+                $$('body').attr('data-name', page.name);
+            });
+        </script>
+    {% endblock %}
+</body>
+</html>
