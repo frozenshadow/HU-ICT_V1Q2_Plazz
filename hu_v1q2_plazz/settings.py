@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'hu_v1q2_plazz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'plazz',
+        'USER': 'homestead',
+        'PASSWORD': 'secret',
+        'HOST': 'localhost',
+        'PORT': '54320',
     }
 }
 
