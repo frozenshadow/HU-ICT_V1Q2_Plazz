@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Form, FieldType, FormField, FieldOption
+
+admin.site.register([Form, FieldType, FormField, FieldOption])
