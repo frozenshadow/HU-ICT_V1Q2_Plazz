@@ -60,19 +60,20 @@ class Location(models.Model):
 
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=255)
+    key = models.CharField(max_length=255, null=True)
 
 
 class NeighbourhoodCity(models.Model):
-    Avg_restaurant_dist = models.DecimalField(decimal_places=2, max_digits=10)
-    Avg_restaurant_amt_1_km = models.DecimalField(decimal_places=2, max_digits=10)
-    Avg_restaurant_amt_3_km = models.DecimalField(decimal_places=2, max_digits=10)
-    Avg_restaurant_amt_5_km = models.DecimalField(decimal_places=2, max_digits=10)
+    Avg_restaurant_dist = models.DecimalField(decimal_places=2, max_digits=10, null=True)
+    Avg_restaurant_amt_1_km = models.DecimalField(decimal_places=2, max_digits=10, null=True)
+    Avg_restaurant_amt_3_km = models.DecimalField(decimal_places=2, max_digits=10, null=True)
+    Avg_restaurant_amt_5_km = models.DecimalField(decimal_places=2, max_digits=10, null=True)
     Age_0_to_15 = models.IntegerField(default=0)
     Age_15_to_25 = models.IntegerField(default=0)
     Age_25_to_45 = models.IntegerField(default=0)
     Age_45_to_65 = models.IntegerField(default=0)
     Age_65_or_older = models.IntegerField(default=0)
-    Avg_income = models.DecimalField(decimal_places=2, max_digits=10)
+    Avg_income = models.DecimalField(decimal_places=2, max_digits=10, null=True)
     Population = models.IntegerField(default=0)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
