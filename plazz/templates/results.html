@@ -96,7 +96,7 @@
 {% block javascripts %}
     {{ block.super }}
     <script>
-    const ratings = {
+    var ratings = {
         {% for row in results %}
             {% if forloop.last %}
             star_{{ forloop.counter }}: {{ row.1|unlocalize }}
@@ -104,15 +104,14 @@
                 star_{{ forloop.counter }}: {{ row.1|unlocalize }},
             {% endif %}
         {% endfor %}
-    };
+    }
 
 // total number of stars
-const starTotal = 5;
+var starTotal = 5;
 
-for(const rating in ratings) {
-  const starPercentage = (ratings[rating] / starTotal) * 100;
-    document.querySelector(`.${rating} .stars-inner`).style.width = `${(Math.round(starPercentage / 10) * 10)}%`;
+for (var rating in ratings) {
+  var starPercentage = ratings[rating] / starTotal * 100;
+    document.querySelector("." + rating + " .stars-inner").style.width = Math.round(starPercentage / 10) * 10 + "%";
 }
-
     </script>
 {% endblock %}
