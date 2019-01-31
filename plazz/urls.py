@@ -10,7 +10,7 @@ urlpatterns = [
     # ex: /location/
     path('', views.index, name='index'),
     # ex: /location/5/
-    path('filters/', views.filters, name='filters'),
+    path('filters/<str:city>', views.filters, name='filters'),
     # # ex: /location/5/results/
     path('results/', views.results, name='results'),
     # # ex: /location/5/vote/

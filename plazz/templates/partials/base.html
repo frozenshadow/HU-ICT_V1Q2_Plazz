@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n plazz_extras %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -72,39 +72,14 @@ font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Initial Page, "data-name" contains page name -->
-            <div data-name="home" class="page">
-                <!-- Navbar -->
-                <div class="navbar no-hairline no-shadow"></div>
+        {% block content %}
 
-                <!-- Scrollable page content -->
-                <div class="page-content login-screen-content">
-                    <div class="login-screen-title">Plaats</div>
-                    <div class="list links-list single-item" style="margin-bottom: 85px;">
-                        <ul>
-                            <li><a href="/filters">Utrecht</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="list links-list">
-                        <div class="block-title">MEER PLAATSEN</div>
-                        <ul>
-                            <li><a href="#">Amsterdam</a></li>
-                            <li><a href="#">Rotterdam</a></li>
-                            <li><a href="#">Utrecht</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="block block-strong no-hairlines text-align-center">
-                        <span><b>Welke plaats moet ik kiezen?</b></span>
-                        <p>Dit is de plaats waarin de meest geschikte locatie voor het Pop-up restaurant zal worden bepaald.</p>
-                    </div>
-                </div>
-            </div>
+           {% endblock content %}
         </div>
     </div>
 
-    {% block content %}
-    {% endblock content %}
+
+
 
     {% block modal %}
 {% comment %}          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -137,23 +112,29 @@ font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
                 id: 'com.plazz.test',
                 routes: [
                     {
-                        path: '/filters',
-                        url: 'filters',
+                        path: '/filters/:city',
+                        url: 'filters/{% verbatim %}{{city}}{% endverbatim %}',
                         on: {
                             pageBeforeIn: function (event, page) {
                                 $$('#price-filter').on('range:change', function (e, range) {
-                                    $$('.price-value').text('$' + (range.value[0]) + ' - $' + (range.value[1]));
+                                    var min = range.value[0].toString(),
+                                        max = range.value[1].toString();
+
+                                    $$('.price-value').text(min + ' - ' + max);
+                                    $$(this).parent().find('input.min-value').val(min);
+                                    $$(this).parent().find('input.max-value').val(max)
                                 });
-                            }
-                        },
+                            },
+                        }
                     },
                     {
-                        path: '/results',
+                        path: '/results/',
                         url: 'results',
                         on: {
                             pageBeforeIn: function (event, page) {
                                 var sortableTable = document.getElementById("resultTable");
                                 sorttable.makeSortable(sortableTable);
+
 
                                 //mapboxgl.accessToken = 'pk.eyJ1IjoiZnJvemVuc2hhZG93IiwiYSI6ImNqcmYzcXJ0cjByanM0NG9nN2ZnYnlsemUifQ.EAu2fpSTfmu0UUBbJOsl1w';
                                 var map = new mapboxgl.Map({
@@ -317,6 +298,11 @@ font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
             $$(document).on('page:beforein', function (e) {
                 var page = e.detail;
                 $$('body').attr('data-name', page.name);
+            });
+
+            $$(document).on("click","#next",function(evt) {
+                evt.preventDefault();
+                   $$(".form-ajax-submit").submit(); //Trigger the Submit Here
             });
         </script>
     {% endblock %}

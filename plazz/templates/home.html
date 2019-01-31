@@ -30,51 +30,37 @@
 {% block body_id %}template-home{% endblock %}
 
 {% block content %}
-{% comment %}    <header>
-{#        <h1 id="welcome-text" class="font-weight-bold text-center">Welkom op <img class="logo" src="{% static 'images/ns_logo.svg' %}" alt="Station"> {{ station.FULLNAME }}</h1>#}
-    </header>
+    <div data-name="home" class="page">
+                <!-- Navbar -->
+                <div class="navbar no-hairline no-shadow"></div>
 
-    <div id="content">
-        <div class="d-flex">
-            <div class="d-flex w-100 flex-column" style="margin-right: 40px">
-                <a class="home-btn home-btn-top" href="#" role="button" data-toggle="modal" data-target="#exampleModal">
-                    <span>Enkele reis</span>
-{#                    <div class="float-right"><img src="{% static 'images/arrow_right.svg' %}" style="display:block; height: 33px;"></div>#}
-                </a>
-                <a class="home-btn" href="#" role="button" data-toggle="modal" data-target="#exampleModal">
-                    <span>Dagretour</span>
-{#                    <div class="float-right"><img src="{% static 'images/arrow_both.svg' %}" style="display:block; height: 33px;"></div>#}
-                </a>
+                <!-- Scrollable page content -->
+                <div class="page-content login-screen-content">
+                    <div class="login-screen-title">Plaats</div>
+                    {% for field in form %}
+                        {% if forloop.first %}
+                            <div class="list links-list single-item" style="margin-bottom: 85px;">
+                                <ul>
+                                    <li><a href="/filters/{{ field.value }}">{{ field.value }}</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="list links-list">
+                            <div class="block-title">MEER PLAATSEN</div>
+                                <ul>
+                        {% endif %}
+
+                        {% if not forloop.first %}
+                                    <li><a href="/filters/{{ field.value }}">{{ field.value }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                                </ul>
+                            </div>
+
+                    <div class="block block-strong no-hairlines text-align-center">
+                        <span><b>Welke plaats moet ik kiezen?</b></span>
+                        <p>Dit is de plaats waarin de meest geschikte locatie voor het Pop-up restaurant zal worden bepaald.</p>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex w-100" style="margin-left: 40px">
-                <a class="home-btn home-btn-all flex-grow-1 text-center" href="#" role="button" data-toggle="modal" data-target="#exampleModal">
-{#                    <img src="{% static 'images/misc_products.svg' %}" style=" height: 60px; margin-bottom: 15px;">#}
-                    Overige producten
-                </a>
-            </div>
-        </div>
-        <div class="w-50">
-{#            <a href="{% url 'avt' %}" class="d-block home-btn home-btn-bottom" style="margin-right: 40px">#}
-                <span>Actuele vertrektijden</span>
-{#                <div class="float-right"><img src="{% static 'images/clock.svg' %}" style="display:block; height: 33px;"></div>#}
-            </a>
-        </div>
-    </div>
-
-    <div id="tips">
-        <div class="speech-bubble"><b>Tip:</b> koop uw treinkaartje makkelijk en <b>&euro;1 voordeliger</b> via de NS app of NS.nl</div>
-    </div>
-
-    <div id="scan-rfid">
-        <span>Scan uw OV-chipkaart</span>
-    </div>
-
-    <footer id="footer">
-        <div id="footer-left" class="h-100 d-flex">
-            <a href="#" id="lang-btn" class="d-flex h-100 align-items-center">
-{#                <div class="float-left"><img src="{% static 'images/flag_english.svg' %}" style="display:block; height: 23px; margin-right: 5px;"></div>#}
-                <span>English</span>
-            </a>
-        </div>
-    </footer>{% endcomment %}
 {% endblock %}
