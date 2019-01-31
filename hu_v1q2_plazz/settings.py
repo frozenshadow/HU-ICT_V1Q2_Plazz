@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'plazz.apps.PlazzConfig',
+    'plazz.templatetags.plazz_extras'
 ]
 
 MIDDLEWARE = [
