@@ -14,12 +14,14 @@ class FormField(models.Model):
     index = models.IntegerField(default=0)
     label = models.CharField(max_length=255)
     required = models.BooleanField()
-    form = models.ForeignKey(Form, unique=True, on_delete=models.CASCADE)
+    min = models.CharField(max_length=255, null=True)
+    max = models.CharField(max_length=255, null=True)
+    form = models.ForeignKey(Form, on_delete=models.CASCADE)
     fieldtype = models.ForeignKey(FieldType, on_delete=models.CASCADE)
 
 
 class FieldOption(models.Model):
-    index = models.IntegerField(primary_key=True)
+    index = models.IntegerField(default=0)
     disabled = models.BooleanField()
     selected = models.BooleanField()
     value = models.CharField(max_length=255)
@@ -47,6 +49,11 @@ class StateCity(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
 
 
+class Neighbourhood(models.Model):
+    name = models.CharField(max_length=255)
+    key = models.CharField(max_length=255, null=True)
+
+
 class Location(models.Model):
     long = models.CharField(max_length=255)
     lat = models.CharField(max_length=255)
@@ -56,11 +63,7 @@ class Location(models.Model):
     square_meter = models.IntegerField(default=0)
     street = models.ForeignKey(Street, on_delete=models.CASCADE)
     state_city = models.ForeignKey(StateCity, on_delete=models.CASCADE)
-
-
-class Neighbourhood(models.Model):
-    name = models.CharField(max_length=255)
-    key = models.CharField(max_length=255, null=True)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
 
 
 class NeighbourhoodCity(models.Model):

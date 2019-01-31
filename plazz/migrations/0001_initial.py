@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FieldOption',
             fields=[
-                ('index', models.IntegerField(primary_key=True, serialize=False)),
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('index', models.IntegerField(default=0)),
                 ('disabled', models.BooleanField()),
                 ('selected', models.BooleanField()),
                 ('value', models.CharField(max_length=255)),
@@ -44,12 +45,12 @@ class Migration(migrations.Migration):
                 ('label', models.CharField(max_length=255)),
                 ('required', models.BooleanField()),
                 ('fieldtype', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plazz.FieldType')),
-                ('form', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plazz.Form', unique=True)),
+                ('form', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plazz.Form')),
             ],
         ),
         migrations.AddField(
             model_name='fieldoption',
             name='formfield',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plazz.FormField', unique=True),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='plazz.FormField'),
         ),
     ]
